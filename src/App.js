@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from './utils/history';
-import './App.css';
+import './App.scss';
 
 import NavBar from './components/NavBar';
 import Profile from './components/Profile';
@@ -10,9 +10,7 @@ function App() {
     return (
         <div className="App">
             <Router history={history}>
-                <header>
-                    <NavBar />
-                </header>
+                <NavBar />
                 <Switch>
                     <Route path="/" exact />
                     <Route path="/profile" component={Profile} />

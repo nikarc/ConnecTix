@@ -1,0 +1,54 @@
+@import './styles/variables.scss';
+
+body {
+    background-color: $white;
+    color: $black;
+}
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+}
+
+.btn {
+    background-color: $Style_1_hex;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 3px;
+    color: $white;
+    cursor: pointer;
+    transition: all $fast;
+    border: 2px solid transparent;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 6px rgba(gray, 0.3);
+    }
+
+    &.btn-transparent {
+        background-color: transparent;
+        border-color: $Style_1_hex;
+        color: $Style_1_hex;
+
+        &:hover {
+            transform: none;
+            box-shadow: none;
+            background-color: $Style_1_hex;
+            color: $white;
+        }
+    }
+}
+
+header {
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+
+    &.sticky {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+}
