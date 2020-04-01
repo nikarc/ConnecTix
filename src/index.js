@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import store from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
@@ -26,9 +25,8 @@ ReactDOM.render(
         redirect_uri={window.location.origin}
         onRedirectCallback={onRedirectCallback}
     >
-        <Provider store={store}>
-            <App />
-        </Provider>
+        {/* Might wanna add this around the <App /> in react-auth0-spa.js */}
+        <Provider store={store} />
     </Auth0Provider>,
     document.getElementById('root')
 );

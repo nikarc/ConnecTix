@@ -10,6 +10,11 @@ body {
     box-sizing: border-box;
 }
 
+ul {
+    list-style: none;
+    padding: 0;
+}
+
 .btn {
     background-color: $Style_1_hex;
     border: none;
@@ -52,3 +57,34 @@ header {
         left: 0;
     }
 }
+
+.page-wrap {
+    margin: 0 auto;
+    padding: 0 20px;
+    max-width: $largeScreen;
+
+    pre {
+        overflow: auto;
+    }
+}
+
+.card {
+    box-shadow: 0 30px 60px -12px rgba(50,50,93,.25),0 18px 36px -18px rgba(0,0,0,.3),0 -12px 36px -8px rgba(0,0,0,.025);
+    border-radius: 8px;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+
+    .card-image {
+        width: 33.333%;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin-right: 20px;
+    }
+}
+
+
+/* Includes */
+@import './styles/pages/home.scss';

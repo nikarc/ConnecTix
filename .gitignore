@@ -24,3 +24,4 @@ yarn-error.log*
 
 # custom
 **/auth_config.json
+*.env
