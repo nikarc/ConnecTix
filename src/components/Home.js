@@ -18,8 +18,8 @@ const GET_UPCOMING_EVENTS = gql`
 const Home = props => (
     <div id="Home">
         <ul>
-            {props.events && props.events.map(event => (
-                <li>
+            {props.events && props.events.map((event, index) => (
+                <li key={index}>
                     <EventCard event={event} />
                 </li>
             ))}

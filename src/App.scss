@@ -1,8 +1,9 @@
 @import './styles/variables.scss';
+@import './styles/Fonts.scss';
 
 body {
-    background-color: $white;
     color: $black;
+    background-color: $white;
 }
 
 /* Global Styles */
@@ -15,19 +16,36 @@ ul {
     padding: 0;
 }
 
+hr {
+    margin: 15px 0;
+    background-color: $lightGray;
+}
+
+a {
+    text-decoration: none;
+    color: $black;
+    display: inline-block;
+
+    &:visited,
+    &:hover {
+        color: $black;
+    }
+}
+
 .btn {
     background-color: $Style_1_hex;
     border: none;
     padding: 10px 25px;
     border-radius: 3px;
-    color: $white;
+    color: white;
     cursor: pointer;
     transition: all $fast;
     border: 2px solid transparent;
 
     &:hover {
-        transform: translateY(-3px);
+        transform: translateY(-5px);
         box-shadow: 0 4px 6px rgba(gray, 0.3);
+        color: white;
     }
 
     &.btn-transparent {
@@ -40,6 +58,22 @@ ul {
             box-shadow: none;
             background-color: $Style_1_hex;
             color: $white;
+        }
+    }
+
+    &.btn-success {
+        background-color: $Style_3_hex;
+    }
+
+    &.cta {
+        display: flex;
+        align-items: center;
+
+        i {
+            font-style: normal;
+            font-weight: bold;
+            margin-left: 10px;
+            @include icon-fonts-before('lnr-arrow-right', 16px, $white);
         }
     }
 }
@@ -68,12 +102,13 @@ header {
     }
 }
 
-.card {
-    box-shadow: 0 30px 60px -12px rgba(50,50,93,.25),0 18px 36px -18px rgba(0,0,0,.3),0 -12px 36px -8px rgba(0,0,0,.025);
-    border-radius: 8px;
+@mixin cardBase {
+    $borderRadius: 8px;
+    border-radius: $borderRadius;
     height: 200px;
     overflow: hidden;
     display: flex;
+    padding: 10px;
 
     .card-image {
         width: 33.333%;
@@ -82,7 +117,17 @@ header {
         background-size: cover;
         background-repeat: no-repeat;
         margin-right: 20px;
+        border-radius: $borderRadius;
     }
+}
+.card {
+    @include cardBase;
+    border: 1px solid $lightGray;
+}
+
+.floating-card {
+    @include cardBase;
+    box-shadow: 0 30px 60px -12px rgba(50,50,93,.25),0 18px 36px -18px rgba(0,0,0,.3),0 -12px 36px -8px rgba(0,0,0,.025);
 }
 
 
