@@ -6,7 +6,6 @@ import ApolloClient from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from '@apollo/react-hooks';
-import styled from 'styled-components';
 import { useAuth0 } from './react-auth0-spa';
 
 import NavBar from './components/NavBar';

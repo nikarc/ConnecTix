@@ -1,5 +1,7 @@
 // src/react-auth0-spa.js
 import React, { useState, useEffect, useContext } from "react";
+import { Provider } from 'react-redux';
+import store from './app/store';
 import createAuth0Client from "@auth0/auth0-spa-js";
 import App from './App';
 
@@ -88,7 +90,9 @@ export const Auth0Provider = ({
             }}
         >
             {children}
-            <App idToken={idToken} />
+            <Provider store={store}>
+                <App idToken={idToken} />
+            </Provider>
         </Auth0Context.Provider>
     );
 };

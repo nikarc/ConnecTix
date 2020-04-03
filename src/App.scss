@@ -35,6 +35,15 @@ a {
     }
 }
 
+p,
+span {
+    line-height: 20px;
+}
+
+small {
+    font-size: 10px;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -97,7 +106,7 @@ input {
     border-color: $Style_1_hex;
     color: $Style_1_hex;
 
-    &:hover {
+    &:not([disabled]):hover {
         transform: none;
         box-shadow: none;
         background-color: $Style_1_hex;

@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import pickerReducer from '../store/pickerSlice';
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    counter: pickerReducer,
   },
 });
