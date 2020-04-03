@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import gql from 'graphql-tag';
 import {useQuery} from '@apollo/react-hooks';
 import { EVENT_ATTRIBUTES, TICKET_COOKIE, COOKIE_EXPIRES } from '../utils/constants';
 import Cookies from '../utils/Cookies';
-import { updateForEvent, selectTickets } from '../store/pickerSlice';
+import { updateForEvent } from '../store/pickerSlice';
 
 import Picker from './Picker';
 
@@ -22,12 +23,13 @@ const GET_EVENT_BY_ID = gql`
 
 const Event = ({ match }) => {
     const { eventId } = match.params;
+
+    const history = useHistory();
     const { loading, error, data } = useQuery(GET_EVENT_BY_ID, {
         variables: { eventId }
     });
 
     /* Redux store logic */
-    const tickets = useSelector(selectTickets);
     const dispatch = useDispatch();
 
     const [ticketCount, setTicketCount] = useState(0);
@@ -39,6 +41,8 @@ const Event = ({ match }) => {
 
         setTicketCount(ticketCount);
         dispatch(updateForEvent({ eventId, ticketCount }));
+
+        history.push('/cart');
     }
 
     if (loading) return <div>Loading...</div>;
