@@ -1,17 +1,13 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import {useQuery} from '@apollo/react-hooks';
+import { EVENT_ATTRIBUTES } from '../utils/constants';
 
 import EventCard from './EventCard';
 
 const GET_UPCOMING_EVENTS = gql`
     query getUpcomingEvents {
-        events(limit: 10, order_by: { date: desc }) {
-            id
-            date
-            image
-            title
-        }
+        events(limit: 10, order_by: { date: desc }) { ${EVENT_ATTRIBUTES} }
     }
 `;
 

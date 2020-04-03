@@ -12,7 +12,8 @@ $Style_4_rgba: rgba(216, 92, 65, 1);
 $Style_5_rgba: rgba(242, 40, 21, 1);
 
 $white: #fafafa;
-$black: #4c4e56;
+$bodyColor: #e3e8ee;
+$black: #3c4257;
 $lightGray: #f2f2f2;
 /* End Colors */
 
@@ -21,4 +22,9 @@ $slow: 0.7s;
 $fast: 0.3s;
 
 /* Sizes */
+$smallScreen: 480px;
+$mediumScreen: 768px;
 $largeScreen: 1440px;
+
+$min: min-width;
+$max: max-width;

@@ -1,3 +1,11 @@
+$siteFont: '';
+
+body, html {
+    font-family: -apple-system , BlinkMacSystemFont , "Segoe UI" , "Roboto" , "Helvetica Neue" , "Ubuntu" , sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+
 .lnr-home:before {
 	content: "\e800";
 }
@@ -814,6 +822,9 @@ $iconFont: 'Linearicons-Free';
     overflow: hidden;
     text-indent: 100%;
     white-space: nowrap;
+    font-style: normal;
+    font-weight: bold;
+    display: inline-block;
     @include icon-fonts-base;
 
     @extend .#{$iconName};
@@ -822,6 +833,7 @@ $iconFont: 'Linearicons-Free';
         display: block;
         color: $color;
         font-size: $size;
+        font-weight: bold;
         text-indent: 0;
     }
 }

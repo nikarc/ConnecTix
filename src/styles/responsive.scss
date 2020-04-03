@@ -1,0 +1,52 @@
+/* Responsive Breakpoints */
+@mixin mediaQuery($constraint, $viewport1, $viewport2: null) {
+  @if $constraint == $min {
+      @media screen and ($min: $viewport1) {
+          @content;
+      }
+  } @else
+  if $constraint == $max {
+      @media screen and ($max: $viewport1) {
+          @content;
+      }
+  } @else {
+      @media screen and ($min: $viewport1) and ($max: $viewport2) {
+          @content;
+      }
+  }
+}
+@mixin query-small {
+  @include mediaQuery($max, ($mediumScreen - 1)) {
+      @content;
+  }
+}
+@mixin query-medium-down {
+  @include mediaQuery($max, ($largeScreen - 1)) {
+      @content;
+  }
+}
+@mixin query-medium {
+  @include mediaQuery(null, $mediumScreen, ($largeScreen - 1)) {
+      @content;
+  }
+}
+@mixin query-medium-up {
+  @include mediaQuery($min, $mediumScreen) {
+      @content;
+  }
+}
+@mixin query-large-up {
+  @include mediaQuery($min, $largeScreen) {
+      @content;
+  }
+}
+@mixin query-large {
+  @include mediaQuery(null, $largeScreen, $xLargeScreen) {
+      @content;
+  }
+}
+@mixin query-xlarge-up {
+  @include mediaQuery($min, $xLargeScreen) {
+      @content;
+  }
+}

@@ -1,9 +1,12 @@
+@import './styles/reset.scss';
 @import './styles/variables.scss';
+@import './styles/components/components.scss';
+@import './styles/responsive.scss';
 @import './styles/Fonts.scss';
 
 body {
     color: $black;
-    background-color: $white;
+    background-color: $bodyColor;
 }
 
 /* Global Styles */
@@ -32,49 +35,89 @@ a {
     }
 }
 
-.btn {
-    background-color: $Style_1_hex;
-    border: none;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input {
+    &[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    &:not([type=radio]),
+    &:not([type=checkbox]) {
+        padding: 5px 10px;
+        border-color: transparent;
+        border-radius: 4px;
+        @include box-shadow-small;
+    }
+}
+
+@mixin btn-base {
     padding: 10px 25px;
     border-radius: 3px;
-    color: white;
     cursor: pointer;
+    background-color: $Style_1_hex;
+    color: white;
     transition: all $fast;
     border: 2px solid transparent;
 
-    &:hover {
-        transform: translateY(-5px);
+    &:not([disabled]):hover {
+        transform: translateY(-3px);
         box-shadow: 0 4px 6px rgba(gray, 0.3);
         color: white;
     }
 
-    &.btn-transparent {
-        background-color: transparent;
-        border-color: $Style_1_hex;
-        color: $Style_1_hex;
-
-        &:hover {
-            transform: none;
-            box-shadow: none;
-            background-color: $Style_1_hex;
-            color: $white;
-        }
+    &:visited {
+        color: $white;
     }
 
-    &.btn-success {
-        background-color: $Style_3_hex;
+    &[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
     }
+}
 
-    &.cta {
-        display: flex;
-        align-items: center;
+.btn {
+    @include btn-base;
+}
 
-        i {
-            font-style: normal;
-            font-weight: bold;
-            margin-left: 10px;
-            @include icon-fonts-before('lnr-arrow-right', 16px, $white);
-        }
+.btn-flat {
+    @include btn-base;
+    background-color: transparent;
+    border-color: transparent;
+    color: $black;
+    @include box-shadow-small;
+}
+
+.btn-transparent {
+    @include btn-base;
+    background-color: transparent;
+    border-color: $Style_1_hex;
+    color: $Style_1_hex;
+
+    &:hover {
+        transform: none;
+        box-shadow: none;
+        background-color: $Style_1_hex;
+        color: $white;
+    }
+}
+
+.btn-success {
+    @include btn-base;
+    background-color: $Style_3_hex;
+}
+
+.cta {
+    @include btn-base;
+    display: flex;
+    align-items: center;
+
+    i {
+        margin-left: 10px;
+        @include icon-fonts-before('lnr-arrow-right', 16px, $white);
     }
 }
 
@@ -127,9 +170,14 @@ header {
 
 .floating-card {
     @include cardBase;
-    box-shadow: 0 30px 60px -12px rgba(50,50,93,.25),0 18px 36px -18px rgba(0,0,0,.3),0 -12px 36px -8px rgba(0,0,0,.025);
+    @include box-shadow;
 }
 
 
-/* Includes */
-@import './styles/pages/home.scss';
+/*-- Includes --*/
+// Pages
+@import './styles/pages/Home.scss';
+@import './styles/pages/Event.scss';
+
+//Components
+@import './styles/components/Picker.scss';

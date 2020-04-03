@@ -1,19 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import UserElements from './UserElements';
 
-class NavBar extends React.Component {
-    constructor (props) {
-        super(props);
-    }
-
-    render () {
-        return (
-            <header>
-                <h1>Ticketing</h1>
-                <UserElements />
-            </header>
-        );
-    }
-};
+const NavBar = () => (
+    <header>
+        <Link to="/">
+            <h1>Ticketing</h1>
+        </Link>
+        <UserElements />
+    </header>
+);
 
 export default NavBar;

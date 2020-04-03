@@ -1,0 +1,53 @@
+#Event {
+    .event-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .event-image,
+        .event-details {
+            flex: 0 0 100%;
+        }
+
+        .event-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .event-details {
+            padding: 0 20px;
+            .event-title-wrap {
+                margin-bottom: 15px;
+
+                h2 {
+                    font-size: 36px;
+                    margin: 20px 0 5px;
+                }
+            }
+            .event-description {
+                margin-bottom: 20px;
+            }
+        }
+
+        .add-to-cart {
+            margin-left: 20px;
+        }
+    }
+
+    @include query-medium-up {
+        .event-header {
+            flex-direction: row;
+            justify-content: space-between;
+
+            .event-image,
+            .event-details {
+                flex: 0 0 50%;
+            }
+        }
+    }
+}
