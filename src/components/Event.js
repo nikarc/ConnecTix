@@ -3,9 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import gql from 'graphql-tag';
 import {useQuery} from '@apollo/react-hooks';
-import { EVENT_ATTRIBUTES, TICKET_COOKIE, COOKIE_EXPIRES } from '../utils/constants';
-import Cookies from '../utils/Cookies';
-import { updateForEvent } from '../store/pickerSlice';
+import { EVENT_ATTRIBUTES } from '../utils/constants';
+import { updateForEvent } from '../store/ticketsSlice';
 
 import Picker from './Picker';
 
@@ -34,11 +33,6 @@ const Event = ({ match }) => {
 
     const [ticketCount, setTicketCount] = useState(0);
     const addTicketsToCart = () => {
-        const ticketCookie = JSON.parse(Cookies.getCookie(TICKET_COOKIE)) || {};
-
-        ticketCookie[eventId] = ticketCount;
-        Cookies.setCookie(TICKET_COOKIE, ticketCookie, COOKIE_EXPIRES)
-
         setTicketCount(ticketCount);
         dispatch(updateForEvent({ eventId, ticketCount }));
 
@@ -70,7 +64,7 @@ const Event = ({ match }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Event;

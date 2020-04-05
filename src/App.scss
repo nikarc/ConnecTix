@@ -212,6 +212,7 @@ header {
 .floating-card {
     @include cardBase;
     @include box-shadow;
+    background-color: $white;
 }
 
 

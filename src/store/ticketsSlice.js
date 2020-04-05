@@ -1,9 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
+import Cookies from 'universal-cookie';
+import {  TICKET_COOKIE } from '../utils/constants';
+
+const cookies = new Cookies();
+const ticketsCookie = cookies.get(TICKET_COOKIE) || {};
 
 export const slice = createSlice({
-    name: 'picker',
+    name: 'tickets',
     initialState: {
-        tickets: {}
+        tickets: ticketsCookie
     },
     reducers: {
         updateForEvent: (state, action) => {
@@ -11,6 +16,7 @@ export const slice = createSlice({
             console.log(`Should update event: ${eventId}, ${ticketCount}`);
 
             state.tickets[eventId] = (state.tickets[eventId] || 0) + ticketCount;
+            cookies.set(TICKET_COOKIE, JSON.stringify(state.tickets), { path: '/' });
         },
     },
 });

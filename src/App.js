@@ -12,6 +12,7 @@ import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Profile from './components/Profile';
 import Event from './components/Event';
+import Cart from './components/Cart';
 
 const {
     REACT_APP_APOLLO_URI,
@@ -48,6 +49,7 @@ function App({ idToken }) {
                             <Route exact path="/" component={Home} />
                             <Route path="/profile" component={Profile} />
                             <Route exact path="/events/:eventId" component={Event} />
+                            <Route path="/cart" component={Cart} />
                         </Switch>
                     </div>
                 </Router>

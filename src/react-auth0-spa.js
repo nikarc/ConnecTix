@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from './app/store';
 import createAuth0Client from "@auth0/auth0-spa-js";
 import App from './App';
+import { CookiesProvider } from 'react-cookie';
 
 const DEFAULT_REDIRECT_CALLBACK = () =>
     window.history.replaceState({}, document.title, window.location.pathname);
@@ -90,9 +91,11 @@ export const Auth0Provider = ({
             }}
         >
             {children}
-            <Provider store={store}>
-                <App idToken={idToken} />
-            </Provider>
+            <CookiesProvider>
+                <Provider store={store}>
+                    <App idToken={idToken} />
+                </Provider>
+            </CookiesProvider>
         </Auth0Context.Provider>
     );
 };
