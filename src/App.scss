@@ -1,4 +1,6 @@
 @import './styles/reset.scss';
+@import '../node_modules/bulma/sass/utilities/_all.sass';
+@import '../node_modules/bulma/sass/grid/_all.sass';
 @import './styles/variables.scss';
 @import './styles/components/components.scss';
 @import './styles/responsive.scss';
@@ -199,23 +201,25 @@ header {
 @mixin cardBase {
     $borderRadius: 4px;
     border-radius: $borderRadius;
-    height: 200px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
 
     .card-header,
-    .card-body {
+    .card-body,
+    .card-footer {
         padding: 20px;
     }
 
-    .card-header {
+    .card-header,
+    .card-footer {
         background-color: white;
-        font-size: 20px;
-        line-height: 28px;
-        font-weight: 400;
+    }
+
+    .card-header {
         display: flex;
         align-items: center;
+        @extend .header-font-1;
 
         h2 {
             margin-right: 10px;
@@ -230,6 +234,12 @@ header {
 
     .card-body {
         background-color: $gray;
+    }
+
+    .card-footer {
+        button {
+            width: 100%;
+        }
     }
 
     .card-image {

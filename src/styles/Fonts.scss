@@ -841,3 +841,21 @@ $iconFont: 'Linearicons-Free';
 .icon-trash {
     @include icon-fonts-before("lnr-trash", 12px, $Style_4_hex);
 }
+
+.header-font-1 {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: $darkBlack;
+}
+
+h2 {
+    @extend .header-font-1;
+}

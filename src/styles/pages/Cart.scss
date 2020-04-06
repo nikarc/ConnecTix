@@ -1,6 +1,7 @@
 #Cart {
-    .floating-card {
+    .card {
         height: auto;
+        margin-bottom: 20px;
 
         .event-total,
         .cart-total {
@@ -25,6 +26,15 @@
                     }
                 }
             }
+        }
+    }
+
+    .cart-summary {
+        text-align: right;
+
+        .order-total {
+            color: $Style_3_hex;
+            @extend .header-font-1;
         }
     }
 }
