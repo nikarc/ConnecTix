@@ -8,20 +8,30 @@ const ticketsCookie = cookies.get(TICKET_COOKIE) || {};
 export const slice = createSlice({
     name: 'tickets',
     initialState: {
-        tickets: ticketsCookie
+        events: ticketsCookie
     },
     reducers: {
         updateForEvent: (state, action) => {
-            const { eventId, ticketCount } = action.payload;
-            console.log(`Should update event: ${eventId}, ${ticketCount}`);
+            const { eventId, events_by_pk } = action.payload;
+            if (!state.events[eventId]) state.events[eventId] = Object.assign(events_by_pk, { tickets: [] });
 
-            state.tickets[eventId] = (state.tickets[eventId] || 0) + ticketCount;
-            cookies.set(TICKET_COOKIE, JSON.stringify(state.tickets), { path: '/' });
+            state.events[eventId].tickets.push(...events_by_pk.available_tickets);
+            cookies.set(TICKET_COOKIE, JSON.stringify(state.events), { path: '/' });
         },
+        removeTicket: (state, { payload }) => {
+            const { eventId } = payload;
+            const ticketCookie = cookies.get(TICKET_COOKIE);
+
+            if (state.events[eventId].tickets.length) {
+                state.events[eventId].tickets.pop();
+                ticketCookie[eventId].tickets.pop();
+                cookies.set(TICKET_COOKIE, JSON.stringify(ticketCookie), { path: '/' })
+            }
+        }
     },
 });
 
-export const { updateForEvent } = slice.actions;
+export const { updateForEvent, removeTicket } = slice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -36,6 +46,6 @@ export const { updateForEvent } = slice.actions;
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
-export const selectTickets = state => state.counter.tickets;
+export const selectTickets = state => state.tickets.events;
 
 export default slice.reducer;

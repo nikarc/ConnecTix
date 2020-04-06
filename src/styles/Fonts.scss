@@ -837,3 +837,7 @@ $iconFont: 'Linearicons-Free';
         text-indent: 0;
     }
 }
+
+.icon-trash {
+    @include icon-fonts-before("lnr-trash", 12px, $Style_4_hex);
+}

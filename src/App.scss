@@ -17,9 +17,15 @@ body {
 ul {
     list-style: none;
     padding: 0;
+
+    li {
+        padding: 10px 0;
+    }
 }
 
-hr {
+.hr {
+    display: block;
+    height: 1px;
     margin: 15px 0;
     background-color: $lightGray;
 }
@@ -178,7 +184,7 @@ header {
 
 .page-wrap {
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 50px 20px;
     max-width: $largeScreen;
 
     pre {
@@ -187,12 +193,28 @@ header {
 }
 
 @mixin cardBase {
-    $borderRadius: 8px;
+    $borderRadius: 4px;
     border-radius: $borderRadius;
     height: 200px;
     overflow: hidden;
     display: flex;
-    padding: 10px;
+    flex-direction: column;
+
+    .card-header,
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-header {
+        background-color: white;
+        font-size: 20px;
+        line-height: 28px;
+        font-weight: 400;
+    }
+
+    .card-body {
+        background-color: $gray;
+    }
 
     .card-image {
         width: 33.333%;
@@ -211,7 +233,7 @@ header {
 
 .floating-card {
     @include cardBase;
-    @include box-shadow;
+    @include box-shadow-medium;
     background-color: $white;
 }
 
@@ -220,6 +242,7 @@ header {
 // Pages
 @import './styles/pages/Home.scss';
 @import './styles/pages/Event.scss';
+@import './styles/pages/Cart.scss';
 
 //Components
 @import './styles/components/Picker.scss';

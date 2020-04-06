@@ -3,10 +3,12 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import gql from 'graphql-tag';
 import {useQuery} from '@apollo/react-hooks';
-import { EVENT_ATTRIBUTES } from '../utils/constants';
+import { EVENT_ATTRIBUTES, GQL_FETCH_HEADERS } from '../utils/constants';
 import { updateForEvent } from '../store/ticketsSlice';
 
 import Picker from './Picker';
+
+const { REACT_APP_APOLLO_URI } = process.env;
 
 const GET_EVENT_BY_ID = gql`
     query getEventById($eventId: Int!) {
@@ -20,7 +22,7 @@ const GET_EVENT_BY_ID = gql`
     }
 `;
 
-const Event = ({ match }) => {
+const Event = ({ match, idToken }) => {
     const { eventId } = match.params;
 
     const history = useHistory();
@@ -32,11 +34,43 @@ const Event = ({ match }) => {
     const dispatch = useDispatch();
 
     const [ticketCount, setTicketCount] = useState(0);
-    const addTicketsToCart = () => {
+    const addTicketsToCart = async () => {
         setTicketCount(ticketCount);
-        dispatch(updateForEvent({ eventId, ticketCount }));
+        
+        try {
+            const GET_TICKETS_FOR_EVENT = `
+                query getAvailableTicketsForEvent {
+                    events_by_pk(id: ${eventId}) {
+                        ${EVENT_ATTRIBUTES}
+                        venueByVenue {
+                          name
+                        }
+                        addressByAddress {
+                            address_1
+                            address_2
+                            city
+                            state
+                            zip
+                        }
+                        available_tickets(limit: ${ticketCount}) {
+                            id
+                            price
+                        }
+                    }
+                }`;
 
-        history.push('/cart');
+            const res = await fetch(REACT_APP_APOLLO_URI, {
+                method: 'POST',
+                headers: GQL_FETCH_HEADERS({ idToken }),
+                body: JSON.stringify({ query: GET_TICKETS_FOR_EVENT })
+            });
+            const { data: { events_by_pk } } = await res.json();
+            dispatch(updateForEvent({ eventId, events_by_pk }));
+            history.push('/cart');
+        } catch (err) {
+            console.error(err);
+            return <pre>{JSON.stringify(err, null, 2)}</pre>;
+        }
     }
 
     if (loading) return <div>Loading...</div>;
@@ -56,6 +90,7 @@ const Event = ({ match }) => {
                     <div className="event-title-wrap">
                         <h2>{_event.title}</h2>
                         <small>{_event.date}</small>
+                        <p>{idToken}</p>
                     </div>
                     <p className="event-description">{_event.description}</p>
                     <Picker onUpdate={setTicketCount} disabled={available_tickets.length} />

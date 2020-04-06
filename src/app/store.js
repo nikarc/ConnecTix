@@ -3,6 +3,6 @@ import ticketsReducer from '../store/ticketsSlice';
 
 export default configureStore({
   reducer: {
-    counter: ticketsReducer,
+    tickets: ticketsReducer,
   },
 });

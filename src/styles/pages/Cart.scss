@@ -1,0 +1,22 @@
+#Cart {
+    .floating-card {
+        height: auto;
+
+        .cart-total {
+            color: $Style_3_hex;
+        }
+
+        .card-body {
+            ul {
+                li {
+                    display: flex;
+                    align-items: center;
+
+                    .icon-trash {
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

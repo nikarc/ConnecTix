@@ -48,7 +48,7 @@ function App({ idToken }) {
                         <Switch>
                             <Route exact path="/" component={Home} />
                             <Route path="/profile" component={Profile} />
-                            <Route exact path="/events/:eventId" component={Event} />
+                            <Route exact path="/events/:eventId" render={props => <Event {...props} idToken={idToken} />} />
                             <Route path="/cart" component={Cart} />
                         </Switch>
                     </div>
