@@ -2,6 +2,7 @@
     .floating-card {
         height: auto;
 
+        .event-total,
         .cart-total {
             color: $Style_3_hex;
         }
@@ -11,6 +12,13 @@
                 li {
                     display: flex;
                     align-items: center;
+
+                    button {
+                        background-color: transparent;
+                        padding: 0;
+                        margin: 0;
+                        border: none;
+                    }
 
                     .icon-trash {
                         margin-left: 10px;

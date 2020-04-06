@@ -19,8 +19,8 @@ const UserAvatar = styled.img`
 `;
 
 const UserSignedIn = ({ avatar, logout }) => {
-    const tickets = useSelector(selectTickets);
-    const ticketCount = tickets && Object.keys(tickets).reduce((accumulator, key) => accumulator + tickets[key], 0);
+    const events = useSelector(selectTickets);
+    const ticketCount = events && Object.keys(events).reduce((accumulator, key) => accumulator + events[key].tickets.length, 0);
 
     return (
         <Fragment>
@@ -30,7 +30,7 @@ const UserSignedIn = ({ avatar, logout }) => {
             </div>
             <Link to="/cart">
                 <button className="btn">
-                    Cart
+                    Cart &nbsp;
                     {ticketCount > 0 ? <span>({ticketCount})</span> : ''}
                 </button>
             </Link>

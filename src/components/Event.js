@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import {useQuery} from '@apollo/react-hooks';
 import { EVENT_ATTRIBUTES, GQL_FETCH_HEADERS } from '../utils/constants';
 import { updateForEvent } from '../store/ticketsSlice';
+import { DateFormat } from '../utils/dates';
 
 import Picker from './Picker';
 
@@ -89,8 +90,7 @@ const Event = ({ match, idToken }) => {
                 <div className="event-details">
                     <div className="event-title-wrap">
                         <h2>{_event.title}</h2>
-                        <small>{_event.date}</small>
-                        <p>{idToken}</p>
+                        <small>{DateFormat(_event.date)}</small>
                     </div>
                     <p className="event-description">{_event.description}</p>
                     <Picker onUpdate={setTicketCount} disabled={available_tickets.length} />

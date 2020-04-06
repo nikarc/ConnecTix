@@ -69,6 +69,10 @@ input {
     }
 }
 
+button {
+    cursor: pointer;
+}
+
 @mixin btn-base {
     padding: 10px 25px;
     border-radius: 3px;
@@ -210,6 +214,18 @@ header {
         font-size: 20px;
         line-height: 28px;
         font-weight: 400;
+        display: flex;
+        align-items: center;
+
+        h2 {
+            margin-right: 10px;
+        }
+
+        span {
+            &:last-child {
+                margin-left: auto;
+            }
+        }
     }
 
     .card-body {
