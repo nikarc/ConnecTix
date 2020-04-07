@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import ticketsReducer from '../store/ticketsSlice';
+import thunk from 'redux-thunk';
+
+import orderReducer from '../store/orderSlice';
 
 export default configureStore({
-  reducer: {
-    tickets: ticketsReducer,
-  },
+    reducer: {
+        order: orderReducer,
+    },
+    middleware: [thunk]
 });

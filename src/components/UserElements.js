@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectTickets } from '../store/ticketsSlice';
+import { selectOrder } from '../store/orderSlice';
 import { useAuth0 } from '../react-auth0-spa';
 import styled from 'styled-components';
 
@@ -19,8 +19,8 @@ const UserAvatar = styled.img`
 `;
 
 const UserSignedIn = ({ avatar, logout }) => {
-    const events = useSelector(selectTickets);
-    const ticketCount = events && Object.keys(events).reduce((accumulator, key) => accumulator + events[key].tickets.length, 0);
+    const { order } = useSelector(selectOrder);
+    const ticketCount = order && order.events && Object.keys(order.events).reduce((accumulator, key) => accumulator + order.events[key].available_tickets.length, 0);
 
     return (
         <Fragment>

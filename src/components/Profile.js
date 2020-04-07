@@ -20,7 +20,7 @@ const UserImg = styled.img`
 `;
 
 const Profile = () => {
-    const { loading, user, isAuthenticated } = useAuth0();
+    const { loading, user } = useAuth0();
 
     if (loading || !user) {
         return <div>Loading...</div>;

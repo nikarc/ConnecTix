@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import gql from 'graphql-tag';
-import {useQuery} from '@apollo/react-hooks';
-import { EVENT_ATTRIBUTES, GQL_FETCH_HEADERS } from '../utils/constants';
-import { updateForEvent } from '../store/ticketsSlice';
+import { useQuery } from '@apollo/react-hooks';
+import { useAuth0 } from '../react-auth0-spa';
+import { EVENT_ATTRIBUTES } from '../utils/constants';
+import { updateOrderById, addTickets } from '../store/orderSlice';
 import { DateFormat } from '../utils/dates';
 
 import Picker from './Picker';
-
-const { REACT_APP_APOLLO_URI } = process.env;
 
 const GET_EVENT_BY_ID = gql`
     query getEventById($eventId: Int!) {
@@ -25,8 +23,8 @@ const GET_EVENT_BY_ID = gql`
 
 const Event = ({ match, idToken }) => {
     const { eventId } = match.params;
+    const { user } = useAuth0();
 
-    const history = useHistory();
     const { loading, error, data } = useQuery(GET_EVENT_BY_ID, {
         variables: { eventId }
     });
@@ -37,41 +35,8 @@ const Event = ({ match, idToken }) => {
     const [ticketCount, setTicketCount] = useState(0);
     const addTicketsToCart = async () => {
         setTicketCount(ticketCount);
-        
-        try {
-            const GET_TICKETS_FOR_EVENT = `
-                query getAvailableTicketsForEvent {
-                    events_by_pk(id: ${eventId}) {
-                        ${EVENT_ATTRIBUTES}
-                        venueByVenue {
-                          name
-                        }
-                        addressByAddress {
-                            address_1
-                            address_2
-                            city
-                            state
-                            zip
-                        }
-                        available_tickets(limit: ${ticketCount}) {
-                            id
-                            price
-                        }
-                    }
-                }`;
-
-            const res = await fetch(REACT_APP_APOLLO_URI, {
-                method: 'POST',
-                headers: GQL_FETCH_HEADERS({ idToken }),
-                body: JSON.stringify({ query: GET_TICKETS_FOR_EVENT })
-            });
-            const { data: { events_by_pk } } = await res.json();
-            dispatch(updateForEvent({ eventId, events_by_pk }));
-            history.push('/cart');
-        } catch (err) {
-            console.error(err);
-            return <pre>{JSON.stringify(err, null, 2)}</pre>;
-        }
+        await dispatch(updateOrderById(user.email, idToken));
+        await dispatch(addTickets(eventId, ticketCount, idToken));
     }
 
     if (loading) return <div>Loading...</div>;

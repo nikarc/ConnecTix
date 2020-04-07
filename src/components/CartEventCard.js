@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
-import { removeTicket } from '../store/ticketsSlice';
 import { DateFormat } from '../utils/dates';
     
 export default function CartEventCard ({ events }) {
@@ -15,7 +14,7 @@ export default function CartEventCard ({ events }) {
                         <div className="card-header">
                             <h2>{event.title}</h2>
                             <span><small>@ {event.venueByVenue.name}</small></span>
-                            <span className="event-total">${(event.tickets.reduce((acc, ticket) => acc + ticket.price, 0) / 100).toFixed(2)}</span>
+                            <span className="event-total">${(event.available_tickets.reduce((acc, ticket) => acc + ticket.price, 0) / 100).toFixed(2)}</span>
                         </div>
                         <div className="card-body">
                             <div className="address-details">
@@ -26,10 +25,10 @@ export default function CartEventCard ({ events }) {
                             </div>
                             <div className="hr"></div>
                             <ul>
-                                {events[eventId].tickets.length && events[eventId].tickets.map((ticket, ticketKey) => (
+                                {events[eventId].available_tickets.length && events[eventId].available_tickets.map((ticket, ticketKey) => (
                                     <li key={`${key}:${ticketKey}`}>
                                         <p>x1 ticket @ ${(ticket.price / 100).toFixed(2)}</p>
-                                        <button onClick={() => dispatch(removeTicket({ eventId }))}><i className="icon-trash"></i></button>
+                                        <button><i className="icon-trash"></i></button>
                                     </li>
                                 ))}
                             </ul>
