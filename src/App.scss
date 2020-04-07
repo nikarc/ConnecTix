@@ -50,6 +50,7 @@ span {
 
 small {
     font-size: 10px;
+    line-height: 16px;
 }
 
 input::-webkit-outer-spin-button,
@@ -85,18 +86,22 @@ button {
     border: 2px solid transparent;
     white-space: nowrap;
 
-    &:not([disabled]):hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 6px rgba(gray, 0.3);
-        color: white;
-    }
+    // &:not([disabled]):hover {
+    //     transform: translateY(-3px);
+    //     box-shadow: 0 4px 6px rgba(gray, 0.3);
+    //     color: white;
+    // }
 
     &:visited {
         color: $white;
     }
 
-    &[disabled] {
+    &[disabled],
+    &:hover {
         opacity: 0.5;
+    }
+
+    &[disabled] {
         cursor: not-allowed;
     }
 }

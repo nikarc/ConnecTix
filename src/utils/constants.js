@@ -9,3 +9,4 @@ export const GQL_FETCH_HEADERS = ({ idToken }) => ({
 /* Cookies */
 export const COOKIE_EXPIRES = 30; // days
 export const TICKET_COOKIE = 'tickets';
+export const ORDER_COOKIE = 'order';

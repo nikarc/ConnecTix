@@ -37,4 +37,34 @@
             @extend .header-font-1;
         }
     }
+
+    .card-footer {
+        .FormGroup {
+            .FormRow {
+                margin-bottom: 20px;
+                padding: 0;
+                padding-left: 11px;
+                border-style: none;
+                background-color: $lightGray;
+                will-change: opacity, transform;
+                box-shadow: 0 6px 9px rgba($lightGray, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 darken($lightGray, 2%);
+                border-radius: 4px;
+            }
+        }
+
+        .StripeElement--webkit-autofill {
+            background: transparent !important;
+        }
+
+        .StripeElement {
+            width: 100%;
+            padding: 11px 15px 11px 0;
+        }
+
+        small {
+            display: block;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    }
 }

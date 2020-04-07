@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import Cookies from 'universal-cookie';
-import {  TICKET_COOKIE } from '../utils/constants';
+import { TICKET_COOKIE } from '../utils/constants';
 
 const cookies = new Cookies();
 const ticketsCookie = cookies.get(TICKET_COOKIE) || {};
