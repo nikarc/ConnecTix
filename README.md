@@ -10,6 +10,7 @@ Frontend:
 * [Apollo React Integrations](https://www.apollographql.com/docs/react/get-started/) - `apollo-boost` and `apollo/react-hooks` are used to communicate with the `graphql` backend
 * [React Router](https://github.com/ReactTraining/react-router) - To manage page routing
 * [Universal Cookie](https://www.npmjs.com/package/universal-cookie) - to save cart status in-browser
+* [Stripe](https://stripe.com/docs/stripe-js/react) To handle payments
 
 Backend:
 * [Hasura](https://hasura.io/) - For super fast `graphql` and `postgresql` setup and admin
