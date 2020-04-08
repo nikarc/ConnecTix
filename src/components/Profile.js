@@ -3,6 +3,7 @@
 import React from "react";
 import { useAuth0 } from "../react-auth0-spa";
 import styled from 'styled-components';
+import history from '../utils/history';
 
 const Wrapper = styled.div`
     padding: 50px 20px;
@@ -20,10 +21,10 @@ const UserImg = styled.img`
 `;
 
 const Profile = () => {
-    const { loading, user, isAuthenticated } = useAuth0();
+    const { loading, user } = useAuth0();
 
-    if (loading || !user) {
-        return <div>Loading...</div>;
+    if (!user) {
+        return history.push('/');
     }
 
     return (
