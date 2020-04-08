@@ -157,6 +157,18 @@ button {
     }
 }
 
+.status-badge {
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    line-height: 18px;
+
+    &.complete {
+        background-color: $Style_2_hex;
+        color: lighten($Style_2_hex, 25%);
+    }
+}
+
 header {
     padding: 10px 50px;
     display: flex;
@@ -296,6 +308,7 @@ header {
 @import './styles/pages/Home.scss';
 @import './styles/pages/Event.scss';
 @import './styles/pages/Cart.scss';
+@import './styles/pages/Profile.scss';
 
 //Components
 @import './styles/components/Picker.scss';

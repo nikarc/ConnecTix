@@ -1,0 +1,40 @@
+#Profile {
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .user-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
+        border: 10px solid rgba(168, 165, 165, 0.5);
+    }
+
+    .user-orders {
+        margin-top: 50px;
+        width: 100%;
+
+        .card {
+            margin-bottom: 10px;
+
+            .card-header {
+                h2 {
+                    flex: 0 0 auto;
+                }
+            }
+
+            .card-body {
+                ul {
+                    padding-left: 10px;
+
+                    li {
+                        padding: 15px 0;
+                        border-bottom: 1px solid darken($gray, 2%);
+                    }
+                }
+            }
+        }
+    }
+}

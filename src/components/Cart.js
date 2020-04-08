@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectOrder } from '../store/orderSlice';
+import { formatDollars } from '../utils/helpers';
 
 import CartEventCard from './CartEventCard';
 import CheckoutForm from './CheckoutForm';
-
-const formattedOrderTotal = orderTotal => (orderTotal / 100).toFixed(2);
 
 const Cart = () => {
     const { order } = useSelector(selectOrder);
@@ -33,16 +32,16 @@ const Cart = () => {
                     <div className="card-body">
                         <p>
                             <span>Subtotal: </span>
-                            <span className="order-subtotal">${formattedOrderTotal(orderTotal)}</span>
+                            <span className="order-subtotal">${formatDollars(orderTotal)}</span>
                         </p>
                         <p>
                             <span>Taxes: </span>
-                            <span className="taxesTotal">${formattedOrderTotal(orderTotal * 0.3)}</span>
+                            <span className="taxesTotal">${formatDollars(orderTotal * 0.3)}</span>
                         </p>
                         <div className="hr"></div>
                         <p className="order-total">
                             <span>Total: </span>
-                            <span>${formattedOrderTotal(orderTotal + (orderTotal * 0.3))}</span>
+                            <span>${formatDollars(orderTotal + (orderTotal * 0.3))}</span>
                         </p>
                     </div>
                     <div className="card-footer">

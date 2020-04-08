@@ -3,39 +3,64 @@
 import React from "react";
 import { Redirect } from 'react-router-dom';
 import { useAuth0 } from "../react-auth0-spa";
-import styled from 'styled-components';
-import history from '../utils/history';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 
-const Wrapper = styled.div`
-    padding: 50px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`
+import UserOrderCard from './UserOrderCard';
 
-const UserImg = styled.img`
-    width: 200px;
-    height: 200px;
-    border-radius: 100%;
-    border: 10px solid rgba(168, 165, 165, 0.5);
+const GET_USER = gql`
+    query getUsers($userEmail: String!) {
+        users(where: { email: { _eq: $userEmail }}) {
+            id
+            orders {
+                id
+                order_status {
+                    type
+                }
+                total
+                confirmation
+                tickets {
+                    id
+                    price
+                }
+            }
+        }
+    }
 `;
 
-const Profile = () => {
+const Profile = ({ user, logout }) => {
+    const { loading, error, data } = useQuery(GET_USER, {
+        variables: { userEmail: user.email },
+    });
+
+    if (error) return <div>{JSON.stringify(error, null, 2)}</div>;
+    if (loading) return <div>Loading...</div>;
+
+    const [ gqlUser ] = data.users;
+
+    return (
+        <div id="Profile">
+            <img className="user-image" src={user.picture} alt="Profile" />
+
+            <h2>{user.name}</h2>
+            <button className="link" onClick={logout}>logout</button>
+            <div className="user-orders">
+                {gqlUser.orders.map((order, key) => (
+                    <UserOrderCard order={order} key={key} />
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const ShowOrRedirectProfile = () => {
     const { user, logout } = useAuth0();
 
     if (!user) {
         return <Redirect to="/" />;
     }
 
-    return (
-        <Wrapper>
-            <UserImg src={user.picture} alt="Profile" />
+    return <Profile user={user} logout={logout} />;
+}
 
-            <h2>{user.name}</h2>
-            <button className="link" onClick={logout}>logout</button>
-        </Wrapper>
-    );
-};
-
-export default Profile;
+export default ShowOrRedirectProfile;
