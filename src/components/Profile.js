@@ -1,6 +1,7 @@
 // src/components/Profile.js
 
 import React from "react";
+import { Redirect } from 'react-router-dom';
 import { useAuth0 } from "../react-auth0-spa";
 import styled from 'styled-components';
 import history from '../utils/history';
@@ -21,10 +22,10 @@ const UserImg = styled.img`
 `;
 
 const Profile = () => {
-    const { loading, user } = useAuth0();
+    const { user, logout } = useAuth0();
 
     if (!user) {
-        return history.push('/');
+        return <Redirect to="/" />;
     }
 
     return (
@@ -32,7 +33,7 @@ const Profile = () => {
             <UserImg src={user.picture} alt="Profile" />
 
             <h2>{user.name}</h2>
-            <pre>{JSON.stringify(user, null, 2)}</pre>
+            <button className="link" onClick={logout}>logout</button>
         </Wrapper>
     );
 };

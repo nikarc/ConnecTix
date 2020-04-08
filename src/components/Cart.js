@@ -22,6 +22,9 @@ const Cart = () => {
             <div className="cart-details column is-two-thirds">
                 <CartEventCard events={order.events} />
             </div>
+            <div className="mobile-indicator">
+                <span className="icon-arrow-down"></span>
+            </div>
             <div className="cart-summary column is-one-third">
                 <div className="floating-card">
                     <div className="card-header">

@@ -25,7 +25,9 @@ const UserSignedIn = ({ avatar, logout }) => {
     return (
         <Fragment>
             <div className="avatar-wrap">
-                <UserAvatar src={avatar} alt="" />
+                <Link to="/profile">
+                    <UserAvatar src={avatar} alt="" />
+                </Link>
                 <NavUserMenu />
             </div>
             <Link to="/cart">

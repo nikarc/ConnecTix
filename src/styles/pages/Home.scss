@@ -2,7 +2,8 @@
     padding-top: 30px;
 
     .event-card {
-        height: 225px;
+        background-color: white;
+        overflow: hidden;
 
         .card-details {
             padding: 20px 0;
@@ -18,10 +19,25 @@
         }
     }
 
+    @include query-small {
+        .event-card {
+            .card-details {
+                padding: 20px;
+            }
+
+            .card-image {
+                height: 200px;
+                width: 100%;
+            }
+        }
+    }
+
     @include query-medium-up {
         .event-card {
             flex-direction: row;
             align-items: stretch;
+            height: auto;
+            height: 225px;
 
             .card-image {
                 flex: 0 0 33.333%;

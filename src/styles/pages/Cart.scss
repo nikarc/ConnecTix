@@ -29,6 +29,14 @@
         }
     }
 
+    .mobile-indicator {
+        text-align: center;
+
+        .icon-arrow-down {
+            @include icon-fonts-before('lnr-arrow-down', 28px, darken($bodyColor, 10%));
+        }
+    }
+
     .cart-summary {
         text-align: right;
 

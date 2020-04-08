@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { DateFormat } from '../utils/dates';
 
 const EventCard = ({ event }) => (
     <div className="event-card card">
         <div className="card-image" style={{ backgroundImage: `url(${event.image})` }}></div>
         <div className="card-details">
-            <h3 className="event-title">
+            <h2 className="event-title">
                 {event.title}
-            </h3>
-            <p>{event.date}</p>
+            </h2>
+            <p>{DateFormat(event.date)}</p>
             <div className="event-description">
                 <p>
                     {event.description}
