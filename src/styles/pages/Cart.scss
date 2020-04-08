@@ -75,4 +75,10 @@
             text-align: center;
         }
     }
+
+    @include query-medium-up {
+        .mobile-indicator {
+            display: none;
+        }
+    }
 }

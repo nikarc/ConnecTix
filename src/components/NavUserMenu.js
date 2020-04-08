@@ -5,7 +5,7 @@ export default function NavUserMenu () {
     const { logout } = useAuth0();
 
     return (
-        <div className="card nav-user-menu">
+        <div className="nav-user-menu">
             <ul>
                 <li>
                     <button className="btn btn-transparent" onClick={() => logout()}>Log out</button>
