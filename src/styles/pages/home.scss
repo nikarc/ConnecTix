@@ -1,3 +1,31 @@
 #Home {
     padding-top: 30px;
+
+    .event-card {
+        min-height: 200px;
+
+        .card-details {
+            padding: 20px 0;
+
+            .event-description {
+                margin: 15px 0 25px;
+            }
+        }
+
+        .btn {
+            width: auto;
+            display: inline-flex;
+        }
+    }
+
+    @include query-medium-up {
+        .event-card {
+            flex-direction: row;
+            align-items: stretch;
+
+            .card-image {
+                flex: 0 0 33.333%;
+            }
+        }
+    }
 }

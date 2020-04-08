@@ -25,10 +25,7 @@ const Home = props => (
 
 const UpcomingEventQuery = () => {
     const { loading, error, data } = useQuery(GET_UPCOMING_EVENTS);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+    if (loading) return <div>Loading...</div>;
     
     if (error) {
         return <pre>{JSON.stringify(error, null, 2)}</pre>

@@ -9,6 +9,11 @@ const EventCard = ({ event }) => (
                 {event.title}
             </h3>
             <p>{event.date}</p>
+            <div className="event-description">
+                <p>
+                    {event.description}
+                </p>
+            </div>
             <Link to={`/events/${event.id}`} className="btn cta">Buy Tickets<i></i></Link>
         </div>
     </div>

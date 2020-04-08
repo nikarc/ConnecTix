@@ -8,7 +8,8 @@ import {
 
 const { REACT_APP_APOLLO_URI } = process.env;
 const cookies = new Cookies();
-const order = cookies.get(ORDER_COOKIE) || {};
+const order = cookies.get(ORDER_COOKIE) || {events: {}};
+const cookiePath = { path: '/' };
 
 export const slice = createSlice({
     name: 'order',
@@ -20,18 +21,23 @@ export const slice = createSlice({
             const { orderData } = action.payload;
 
             state.order = Object.assign(orderData, { events: {} });
-            cookies.set(ORDER_COOKIE, state.order, { path: '/' });
+            cookies.set(ORDER_COOKIE, state.order, cookiePath);
         },
         addTicketsToOrder: (state, action) => {
             const { event } = action.payload;
 
             state.order.events[event.id] = event;
-            cookies.set(ORDER_COOKIE, state.order, { path: '/' });
-        }
+            cookies.set(ORDER_COOKIE, state.order, cookiePath);
+        },
+        finalizeOrder: async state => new Promise(resolve => {
+            state.order = {};
+            cookies.remove(ORDER_COOKIE, cookiePath);
+            resolve();
+        })
     },
 });
 
-export const { createOrUpdateOrder, addTicketsToOrder } = slice.actions;
+export const { createOrUpdateOrder, addTicketsToOrder, finalizeOrder } = slice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -91,15 +97,17 @@ export const updateOrderById = (userEmail, idToken) => async (dispatch) => {
 
         // User/Order id's are not required for anonymous checkout
         let userId;
-        let order;
+        let orderId;
 
         if (userData && userData.users && userData.users.length) {
             const user = userData.users[0];
             userId = user.id;
-            [ order ] = user.orders;
+
+            const [ order ] = user.orders;
+            if (order) orderId = order.id;
         }
 
-        const orderQuery = CREATE_ORDER(userId, order.id);
+        const orderQuery = CREATE_ORDER(userId, orderId);
 
         // update or create order
         const orderRes = await fetch(REACT_APP_APOLLO_URI, {
