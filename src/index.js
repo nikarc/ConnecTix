@@ -9,7 +9,6 @@ const {
     REACT_APP_AUTH_CONFIG_DOMAIN: domain,
     REACT_APP_AUTH_CONFIG_CLIENT_ID: clientId
 } = process.env;
-console.log(`YOOOO `, domain, clientId)
 
 // A function that routes the user to the right place
 // after login
