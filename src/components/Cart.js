@@ -27,7 +27,7 @@ const Cart = () => {
             <div className="cart-summary column is-one-third">
                 <div className="floating-card">
                     <div className="card-header">
-                        <span>Cart Summary</span>
+                        <h2>Cart Summary</h2>
                     </div>
                     <div className="card-body">
                         <p>

@@ -29,6 +29,18 @@ export const slice = createSlice({
             state.order.events[event.id] = event;
             cookies.set(ORDER_COOKIE, state.order, cookiePath);
         },
+        removeTicketsFromOrderEvent: (state, action) => {
+            const { eventId, ticketCount } = action.payload;
+            const eventTickets = state.order.events[eventId].available_tickets;
+
+            if (eventTickets.length <= ticketCount) {
+                delete state.order.events[eventId];
+            } else {
+                state.order.events[eventId].available_tickets.splice(-ticketCount, ticketCount);
+            }
+
+            cookies.set(ORDER_COOKIE, state.order, cookiePath);
+        },
         finalizeOrder: async state => new Promise(resolve => {
             state.order = {};
             cookies.remove(ORDER_COOKIE, cookiePath);
@@ -37,7 +49,12 @@ export const slice = createSlice({
     },
 });
 
-export const { createOrUpdateOrder, addTicketsToOrder, finalizeOrder } = slice.actions;
+export const {
+    createOrUpdateOrder,
+    addTicketsToOrder,
+    finalizeOrder,
+    removeTicketsFromOrderEvent,
+} = slice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -175,18 +192,66 @@ export const addTickets = (eventId, ticketCount, idToken) => async (dispatch, ge
         // Update tickets with order
         const { order } = getState().order;
         const ticketQuery = UPDATE_TICKET_ORDER(event.available_tickets.map(t => t.id), order.id);
-        console.log(ticketQuery);
-        const ticketRes = await fetch(REACT_APP_APOLLO_URI, {
+
+        await fetch(REACT_APP_APOLLO_URI, {
             method: 'POST',
             headers,
             body: JSON.stringify({ query: ticketQuery })
         });
-        const ticketJson = await ticketRes.json();
-        console.log(ticketJson);
-
 
         dispatch(addTicketsToOrder({ event }));
 
         resolve();
     });
 };
+
+const GET_TICKETS_TO_REMOVE = (eventId, ticketCount) =>`
+    query getTicketsToRemove {
+        tickets(where: { event: { _eq: ${eventId} }}, limit: ${ticketCount}) {
+            id
+        }
+    }
+`;
+
+const REMOVE_TICKETS_FROM_ORDER = (ticketIds) => `
+    mutation removeTicketsFromOrder($ticketIds: [Int!]) {
+      update_tickets(where: {
+        id: {
+          _in: ${ticketIds}
+        }
+      }, _set: { order: null }) {
+        returning {
+          id
+        }
+      }
+    }
+`;
+
+export const removeTickets = (eventId, ticketCount, idToken) => dispatch => new Promise(async (resolve, reject) => {
+    try {
+        const headers = GQL_FETCH_HEADERS({ idToken });
+        let query = GET_TICKETS_TO_REMOVE(eventId, ticketCount);
+        const ticketRes = await fetch(REACT_APP_APOLLO_URI, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ query })
+        });
+        const { data: ticketData } = await ticketRes.json();
+
+        if (!ticketData || !ticketData.tickets) return reject(new Error('No ticket data returned for ticket remove'));
+
+        query = REMOVE_TICKETS_FROM_ORDER(ticketData.tickets.map(t => t.id));
+        await fetch(REACT_APP_APOLLO_URI, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ query })
+        });
+
+        dispatch(removeTicketsFromOrderEvent({ eventId, ticketCount }));
+
+        resolve();
+    } catch (err) {
+        reject(err);
+    }
+})
+

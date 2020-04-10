@@ -1,9 +1,16 @@
 import React, { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
+import { useAuth0 } from '../react-auth0-spa';
+import { removeTickets } from '../store/orderSlice';
 import { DateFormat } from '../utils/dates';
     
 export default function CartEventCard ({ events }) {
+    const { idToken } = useAuth0();
     const dispatch = useDispatch();
+
+    const removeTicket = eventId => {
+       dispatch(removeTickets(eventId, 1, idToken));
+    }
 
     return (
         <Fragment>
@@ -28,7 +35,7 @@ export default function CartEventCard ({ events }) {
                                 {events[eventId].available_tickets.length && events[eventId].available_tickets.map((ticket, ticketKey) => (
                                     <li key={`${key}:${ticketKey}`}>
                                         <p>x1 ticket @ ${(ticket.price / 100).toFixed(2)}</p>
-                                        <button><i className="icon-trash"></i></button>
+                                        <button onClick={removeTicket.bind(this, eventId)}><i className="icon-trash"></i></button>
                                     </li>
                                 ))}
                             </ul>
