@@ -38,8 +38,9 @@ const Event = ({ match, idToken }) => {
     const [ticketCount, setTicketCount] = useState(0);
     const addTicketsToCart = async () => {
         setTicketCount(ticketCount);
+        let userEmail;
 
-        const { email: userEmail } = user;
+        if (user && user.email) userEmail = user.email;
         if (!order) await dispatch(updateOrderById(userEmail, idToken));
         await dispatch(addTickets(eventId, ticketCount, idToken));
 
