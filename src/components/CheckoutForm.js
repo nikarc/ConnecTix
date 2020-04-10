@@ -52,7 +52,6 @@ export default function CheckoutForm () {
 
         const { id: sid, card } = paymentMethod;
         const orderId = order.id;
-        console.log('ORDER)!!!!! ', order);
 
         await dispatch(finalizeOrderAsync(card.last4, orderId, sid, idToken));
         history.push(`/confirmation?order=${orderId}`);
