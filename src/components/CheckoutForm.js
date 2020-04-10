@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import gql from 'graphql-tag';
+import { Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useMutation } from '@apollo/react-hooks';
-import { selectOrder, finalizeOrder } from '../store/orderSlice';
+import { selectOrder } from '../store/orderSlice';
+import { finalizeOrderAsync } from '../store/orderAsyncCalls';
 import { useSelector } from 'react-redux';
 import {
     CardElement,
@@ -10,27 +10,18 @@ import {
     useElements
 } from '@stripe/react-stripe-js';
 import history from '../utils/history';
-
-const ORDER_COMPLETE_UPDATE = gql`
-    mutation orderComplete($lastFour: String!, $order: Int!, $sid: String!) {
-      insert_stripe_payment(objects: [{
-        last_four: $lastFour
-        order: $order
-        stripe_id: $sid
-      }]) {
-        affected_rows
-      }
-    }
-`;
+import { useAuth0 } from '../react-auth0-spa';
 
 export default function CheckoutForm () {
+    const { idToken } = useAuth0();
     const dispatch = useDispatch();
     const { order } = useSelector(selectOrder);
     const stripe = useStripe();
     const elements = useElements();
     const [cardIsValid, setCardIsValid] = useState(false);
     const [cardError, setCardError] = useState(null);
-    const [orderUpdateComplete, { data }] = useMutation(ORDER_COMPLETE_UPDATE);
+
+    if (!order) return <Redirect to="/" />;
 
     const validateCard = event => {
         if (event.complete) {
@@ -61,14 +52,9 @@ export default function CheckoutForm () {
 
         const { id: sid, card } = paymentMethod;
         const orderId = order.id;
-        orderUpdateComplete({
-            variables: {
-                sid,
-                lastFour: card.last4,
-                order: orderId
-            }
-        });
-        await dispatch(finalizeOrder());
+        console.log('ORDER)!!!!! ', order);
+
+        await dispatch(finalizeOrderAsync(card.last4, orderId, sid, idToken));
         history.push(`/confirmation?order=${orderId}`);
     }
     

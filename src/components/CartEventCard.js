@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAuth0 } from '../react-auth0-spa';
-import { removeTickets } from '../store/orderSlice';
+import { removeTicketsAsync } from '../store/orderAsyncCalls';
 import { DateFormat } from '../utils/dates';
     
 export default function CartEventCard ({ events }) {
@@ -9,7 +9,7 @@ export default function CartEventCard ({ events }) {
     const dispatch = useDispatch();
 
     const removeTicket = eventId => {
-       dispatch(removeTickets(eventId, 1, idToken));
+       dispatch(removeTicketsAsync(eventId, 1, idToken));
     }
 
     return (

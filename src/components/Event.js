@@ -4,7 +4,11 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { useAuth0 } from '../react-auth0-spa';
 import { EVENT_ATTRIBUTES } from '../utils/constants';
-import { updateOrderById, addTickets, selectOrder } from '../store/orderSlice';
+import { selectOrder } from '../store/orderSlice';
+import {
+    updateOrderByIdAsync,
+    addTicketsAsync,
+} from '../store/orderAsyncCalls';
 import { DateFormat } from '../utils/dates';
 import { useSelector } from 'react-redux';
 import history from '../utils/history';
@@ -41,8 +45,8 @@ const Event = ({ match, idToken }) => {
         let userEmail;
 
         if (user && user.email) userEmail = user.email;
-        if (!order) await dispatch(updateOrderById(userEmail, idToken));
-        await dispatch(addTickets(eventId, ticketCount, idToken));
+        if (!order) await dispatch(updateOrderByIdAsync(userEmail, idToken));
+        await dispatch(addTicketsAsync(eventId, ticketCount, idToken));
 
         history.push('/cart');
     }
