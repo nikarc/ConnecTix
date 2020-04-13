@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { selectOrder } from '../store/orderSlice';
 import { formatDollars } from '../utils/helpers';
 
-import CartEventCard from './CartEventCard';
-import CheckoutForm from './CheckoutForm';
+import CartEventCard from '../components/CartEventCard';
+import CheckoutForm from '../components/CheckoutForm';
 
 const Cart = () => {
     const { order } = useSelector(selectOrder);

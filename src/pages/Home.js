@@ -4,7 +4,7 @@ import {useQuery} from '@apollo/react-hooks';
 import { EVENT_ATTRIBUTES } from '../utils/constants';
 import { Link } from 'react-router-dom';
 
-import EventCard from './EventCard';
+import EventCard from '../components/EventCard';
 
 const GET_UPCOMING_EVENTS = gql`
     query getUpcomingEvents {

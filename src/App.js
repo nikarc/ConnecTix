@@ -10,11 +10,11 @@ import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 
 import NavBar from './components/NavBar';
-import Home from './components/Home';
-import Profile from './components/Profile';
-import Event from './components/Event';
-import Cart from './components/Cart';
-import Confirmation from './components/Confirmation';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import Event from './pages/Event';
+import Cart from './pages/Cart';
+import Confirmation from './pages/Confirmation';
 
 const {
     REACT_APP_APOLLO_URI,

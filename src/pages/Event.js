@@ -13,7 +13,7 @@ import { DateFormat } from '../utils/dates';
 import { useSelector } from 'react-redux';
 import history from '../utils/history';
 
-import Picker from './Picker';
+import Picker from '../components/Picker';
 
 const GET_EVENT_BY_ID = gql`
     query getEventById($eventId: Int!) {

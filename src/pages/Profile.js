@@ -6,7 +6,7 @@ import { useAuth0 } from "../react-auth0-spa";
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 
-import UserOrderCard from './UserOrderCard';
+import UserOrderCard from '../components/UserOrderCard';
 
 const GET_USER = gql`
     query getUsers($userEmail: String!) {
