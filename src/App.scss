@@ -292,7 +292,12 @@ header {
     }
 
     a {
-        color: $color__primary-dark;
+        &:not(.cta) {
+            &,
+            &:visited {
+                color: $color__primary-dark;
+            }
+        }
     }
 
     @include query-small {

@@ -54,6 +54,7 @@ function App({ idToken, context }) {
                             <Route path="/confirmation" render={() => <Confirmation />} />
                             <Route path="/cart" render={() => <Cart />} />
                             <Route exact path="/style-guide" render={() => <StyleGuide />} />
+                            <Route path="/venues/:venueName" render={props => <StyleGuide />} />
                         </Switch>
                     </Router>
                 </div>
