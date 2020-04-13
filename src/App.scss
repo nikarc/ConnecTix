@@ -255,6 +255,7 @@ header {
             margin-right: 10px;
         }
 
+        a,
         span {
             &:last-child {
                 margin-left: auto;
@@ -277,7 +278,7 @@ header {
         a.btn,
         a.cta {
             width: auto;
-            display: inline-block;
+            display: inline-flex;
         }
     }
 
@@ -288,6 +289,10 @@ header {
         background-size: cover;
         background-repeat: no-repeat;
         margin-right: 20px;
+    }
+
+    a {
+        color: $color__primary-dark;
     }
 
     @include query-small {

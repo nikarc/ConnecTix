@@ -15,6 +15,7 @@ import Profile from './pages/Profile';
 import Event from './pages/Event';
 import Cart from './pages/Cart';
 import Confirmation from './pages/Confirmation';
+import StyleGuide from './pages/StyleGuide';
 
 const {
     REACT_APP_APOLLO_URI,
@@ -52,6 +53,7 @@ function App({ idToken, context }) {
                             <Route exact path="/events/:eventId" render={props => <Event {...props} idToken={idToken} />} />
                             <Route path="/confirmation" render={() => <Confirmation />} />
                             <Route path="/cart" render={() => <Cart />} />
+                            <Route exact path="/style-guide" render={() => <StyleGuide />} />
                         </Switch>
                     </Router>
                 </div>

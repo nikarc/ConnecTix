@@ -93,9 +93,6 @@ const GET_TICKETS_FOR_EVENT = (eventId, ticketCount) => `
     query getAvailableTicketsForEvent {
         events_by_pk(id: ${eventId}) {
             ${EVENT_ATTRIBUTES}
-            venueByVenue {
-              name
-            }
             addressByAddress {
                 address_1
                 address_2

@@ -7,3 +7,49 @@
 @mixin box-shadow-small {
     box-shadow: 0 2px 5px 0 rgba(60,66,87, 0.12) , 0 1px 1px 0 rgba(0,0,0, 0.12);
 }
+
+
+$borderThickness: 4px;
+$borderRadius: $borderThickness * 2;
+
+@mixin calendarBorder {
+    border: $borderThickness solid $color__primary-dark;
+}
+
+.calendar-icon {
+    display: inline-block;
+    background-color: white;
+    @include box-shadow-small;
+    border-radius: $borderRadius;
+
+    .time,
+    .date-wrap {
+        text-align: center;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .time {
+        @include calendarBorder;
+        padding: 5px 10px;
+        border-radius: $borderRadius $borderRadius 0 0;
+        background-color: $color__primary-dark;
+        color: white;
+        text-transform: lowercase;
+    }
+
+    .date-wrap {
+        @include calendarBorder;
+        border-top: none;
+        border-radius: 0 0 $borderRadius $borderRadius;
+        padding: 5px 10px 10px;
+    }
+
+    .weekday {
+        opacity: 0.6;
+    }
+
+    .date {
+        font-size: 24px;
+    }
+}
