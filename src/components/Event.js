@@ -59,19 +59,21 @@ const Event = ({ match, idToken }) => {
 
         return (
             <div id="Event">
-                <div className="event-header">
-                    <div className="event-image">
-                        <img src={_event.image} alt={_event.title} />
-                    </div>
-                    <div className="event-details">
-                        <div className="event-title-wrap">
-                            <h2>{_event.title}</h2>
-                            <small>{DateFormat(_event.date)}</small>
+                <div className="page-wrap">
+                    <div className="event-header">
+                        <div className="event-image">
+                            <img src={_event.image} alt={_event.title} />
                         </div>
-                        <p className="event-description">{_event.description}</p>
-                        <Picker onUpdate={setTicketCount} disabled={available_tickets.length} />
-                        <button className="btn add-to-cart" onClick={addTicketsToCart} disabled={!ticketCount}>Buy Tickets</button>
-                        <small>{available_tickets} Ticket{available_tickets > 1 ? 's' : ''} left!</small>
+                        <div className="event-details">
+                            <div className="event-title-wrap">
+                                <h2>{_event.title}</h2>
+                                <small>{DateFormat(_event.date)}</small>
+                            </div>
+                            <p className="event-description">{_event.description}</p>
+                            <Picker onUpdate={setTicketCount} disabled={available_tickets.length} />
+                            <button className="btn add-to-cart" onClick={addTicketsToCart} disabled={!ticketCount}>Buy Tickets</button>
+                            <small>{available_tickets} Ticket{available_tickets > 1 ? 's' : ''} left!</small>
+                        </div>
                     </div>
                 </div>
             </div>

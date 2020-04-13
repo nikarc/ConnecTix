@@ -1,5 +1,50 @@
 #Home {
-    padding-top: 30px;
+    .hero {
+        position: relative;
+        margin-bottom: 150px;
+
+        .hero-content {
+            background-color: $color__primary;
+            padding: 50px 0;
+            min-height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            h1 {
+                font-size: 32px;
+                color: white;
+                text-align: center;
+            }
+
+            #FeaturedEvent {
+                position: absolute;
+                bottom: 50%;
+                left: 50%;
+                transform: translate(-50%, 100%);
+                width: 100%;
+                min-height: 200px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                > .header-font-1 {
+                    color: $fontWhite;
+                    margin-bottom: 15px;
+                }
+            }
+
+            .featured-card {
+                max-width: $mediumScreen; 
+                flex: 1 0 100%;
+            }
+        }
+
+        svg {
+            width: 100%;
+        }
+    }
 
     .event-card {
         background-color: white;

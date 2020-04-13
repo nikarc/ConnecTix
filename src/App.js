@@ -37,24 +37,22 @@ const createApolloClient = authToken => {
     })
 };
 
-function App({ idToken }) {
+function App({ idToken, context }) {
     const client = createApolloClient(idToken);
 
     return (
         <ApolloProvider client={client}>
             <Elements stripe={stripePromise}>
-                <div className="App">
+                <div className={'App'}>
                     <Router history={history}>
                         <NavBar />
-                        <div className="page-wrap">
-                            <Switch>
-                                <Route exact path="/" render={() => <Home />} />
-                                <Route path="/profile" render={() => <Profile />} />
-                                <Route exact path="/events/:eventId" render={props => <Event {...props} idToken={idToken} />} />
-                                <Route path="/confirmation" render={() => <Confirmation />} />
-                                <Route path="/cart" render={() => <Cart />} />
-                            </Switch>
-                        </div>
+                        <Switch>
+                            <Route exact path="/" render={() => <Home />} />
+                            <Route path="/profile" render={() => <Profile />} />
+                            <Route exact path="/events/:eventId" render={props => <Event {...props} idToken={idToken} />} />
+                            <Route path="/confirmation" render={() => <Confirmation />} />
+                            <Route path="/cart" render={() => <Cart />} />
+                        </Switch>
                     </Router>
                 </div>
             </Elements>

@@ -40,14 +40,16 @@ const Profile = ({ user, logout }) => {
 
     return (
         <div id="Profile">
-            <img className="user-image" src={user.picture} alt="Profile" />
+            <div className="page-wrap">
+                <img className="user-image" src={user.picture} alt="Profile" />
 
-            <h2>{user.name}</h2>
-            <button className="link" onClick={logout}>logout</button>
-            <div className="user-orders">
-                {gqlUser.orders.map((order, key) => (
-                    <UserOrderCard order={order} key={key} />
-                ))}
+                <h2>{user.name}</h2>
+                <button className="link" onClick={logout}>logout</button>
+                <div className="user-orders">
+                    {gqlUser.orders.map((order, key) => (
+                        <UserOrderCard order={order} key={key} />
+                    ))}
+                </div>
             </div>
         </div>
     );

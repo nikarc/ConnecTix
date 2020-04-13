@@ -7,8 +7,7 @@
 @import './styles/Fonts.scss';
 
 body {
-    color: $black;
-    background-color: $bodyColor;
+    background-color: white;
 }
 
 /* Global Styles */
@@ -89,7 +88,7 @@ button {
     padding: 10px 25px;
     border-radius: 3px;
     cursor: pointer;
-    background-color: $Style_1_hex;
+    background-color: $color__primary-dark;
     color: white;
     transition: all $fast;
     border: 2px solid transparent;
@@ -130,13 +129,13 @@ button {
 .btn-transparent {
     @include btn-base;
     background-color: transparent;
-    border-color: $Style_1_hex;
-    color: $Style_1_hex;
+    border-color: $color__primary;
+    color: $color__primary;
 
     &:not([disabled]):hover {
         transform: none;
         box-shadow: none;
-        background-color: $Style_1_hex;
+        background-color: $color__primary;
         color: $white;
     }
 }
@@ -229,7 +228,7 @@ header {
 }
 
 @mixin cardBase {
-    $borderRadius: 4px;
+    $borderRadius: 8px;
     border-radius: $borderRadius;
     overflow: hidden;
     display: flex;
@@ -268,8 +267,17 @@ header {
     }
 
     .card-footer {
+        display: flex;
+        justify-content: flex-end;
+
         button {
             width: 100%;
+        }
+
+        a.btn,
+        a.cta {
+            width: auto;
+            display: inline-block;
         }
     }
 
@@ -299,6 +307,24 @@ header {
     @include cardBase;
     @include box-shadow-medium;
     background-color: $white;
+}
+
+.image-card {
+    display: flex;
+    flex-direction: row;
+
+    .card-image {
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        flex: 0 0 200px;
+        margin: 0;
+    }
+
+    .image-card--content {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 
