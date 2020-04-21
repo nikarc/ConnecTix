@@ -20,3 +20,8 @@ Backend:
 ## Motivation
 
 I am building this as way to refresh/update my knowlege on the technologies involved, namely `React` and `graphql` as well as Redux.
+
+## Todo
+
+* Venue page - `/venues/:venue-name` a landing page for the venue to display a calendar with upcoming events
+* Order Confirmation Page - `/confirmation?orderId` to show order details and next steps
