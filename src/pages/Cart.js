@@ -17,8 +17,8 @@ const Cart = () => {
     if (!order || !Object.keys(order.events).length) return <p>Cart is empty</p>;
 
     return (
-        <div id="Cart">
-            <div className="page-wrap columns">
+        <div id="Cart" className="page-wrap">
+            <div className="page-container columns">
                 <div className="cart-details column is-two-thirds">
                     <CartEventCard events={order.events} />
                 </div>

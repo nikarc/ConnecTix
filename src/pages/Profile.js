@@ -39,8 +39,8 @@ const Profile = ({ user, logout }) => {
     const [ gqlUser ] = data.users;
 
     return (
-        <div id="Profile">
-            <div className="page-wrap">
+        <div id="Profile" className="page-wrap">
+            <div className="page-container">
                 <img className="user-image" src={user.picture} alt="Profile" />
 
                 <h2>{user.name}</h2>

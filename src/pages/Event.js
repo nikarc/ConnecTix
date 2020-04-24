@@ -58,8 +58,8 @@ const Event = ({ match, idToken }) => {
         const available_tickets = _event.available_tickets.length;
 
         return (
-            <div id="Event">
-                <div className="page-wrap">
+            <div id="Event" className="page-wrap">
+                <div className="page-container">
                     <div className="event-header">
                         <div className="event-image">
                             <img src={_event.image} alt={_event.title} />

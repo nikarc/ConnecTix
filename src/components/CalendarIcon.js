@@ -22,7 +22,7 @@ export default function CalendarIcon ({ eventDate }) {
     ] = dtFormatter.formatToParts(date);
 
     return (
-        <div class="calendar-icon">
+        <div className="calendar-icon">
             <div className="time">{`${hour}:${minute} ${dayPeriod}`}</div>
             <div className="date-wrap">
                 <p className="weekday">{weekday}</p>

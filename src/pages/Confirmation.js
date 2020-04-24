@@ -10,7 +10,7 @@ export default function Confirmation () {
     const order = query.get('order');
 
     return (
-        <div className="page-wrap">
+        <div className="page-container">
             <h1>Success! Order complete</h1>
         </div>
     );

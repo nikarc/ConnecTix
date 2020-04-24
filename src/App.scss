@@ -93,6 +93,7 @@ button {
     transition: all $fast;
     border: 2px solid transparent;
     white-space: nowrap;
+    font-size: 12px;
 
     // &:not([disabled]):hover {
     //     transform: translateY(-3px);
@@ -174,10 +175,20 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: $white;
 
     #BrandName {
         line-height: 50px;
         font-size: 20px;
+        color: $color__primary-dark;
+
+        &:hover {
+            color: $color__primary;
+        }
     }
 
     &.sticky {
@@ -218,6 +229,10 @@ header {
 }
 
 .page-wrap {
+    margin-top: 70px;
+}
+
+.page-container {
     margin: 0 auto;
     padding: 50px 20px;
     max-width: $largeScreen;

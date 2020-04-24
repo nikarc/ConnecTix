@@ -7,7 +7,7 @@ import CalendarIcon from '../components/CalendarIcon';
 export default function FeaturedCard ({ featuredEvent }) {
     const { venueByVenue: { name: venueName } } = featuredEvent;
     return (
-        <div class="featured-card floating-card image-card">
+        <div className="featured-card floating-card image-card">
             <div className="card-image" style={{ backgroundImage: `url(${featuredEvent.image})`}}></div>
             <div className="image-card--content">
                 <div className="card-header">
