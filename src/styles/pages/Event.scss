@@ -34,6 +34,12 @@
         }
     }
 
+    .blue-background {
+        background-color: $color__primary;
+        flex: 1 0 auto;
+        margin-top: -1px;
+    }
+
     @include query-medium-up {
         .event-header {
             flex-direction: row;

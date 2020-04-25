@@ -169,6 +169,25 @@ button {
     }
 }
 
+svg.wave { 
+    path {
+        fill: $color__primary;
+        fill-opacity: 1;
+    }
+
+    &.wave__light {
+        path {
+            fill-opacity: 0.6;
+        }
+    }
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 header {
     padding: 10px 50px;
     display: flex;
@@ -230,6 +249,9 @@ header {
 
 .page-wrap {
     margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
 }
 
 .page-container {

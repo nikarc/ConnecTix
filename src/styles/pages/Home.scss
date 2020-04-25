@@ -3,19 +3,6 @@
         position: relative;
         margin-bottom: 150px;
 
-        svg {
-            path {
-                fill: $color__primary;
-                fill-opacity: 1;
-            }
-
-            &:first-of-type {
-                path {
-                    fill-opacity: 0.6;
-                }
-            }
-        }
-
         .hero-content {
             background-color: $color__primary;
             padding: 30px 0;
