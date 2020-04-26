@@ -36,8 +36,8 @@ const Home = () => {
                 <svg className="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path d="M0,288L80,266.7C160,245,320,203,480,208C640,213,800,267,960,272C1120,277,1280,235,1360,213.3L1440,192L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path></svg>
             </div>
             <div className="page-container">
-                <ul>
-                    {data.events && data.events.slice(1).map((event, index) => (
+                <ul className="event-list">
+                    {data.events && data.events.map((event, index) => (
                         <li key={index}>
                             <EventCard event={event} />
                         </li>
