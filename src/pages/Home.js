@@ -8,7 +8,7 @@ import FeaturedCard from '../components/FeaturedCard';
 
 const GET_UPCOMING_EVENTS = gql`
     query getUpcomingEvents {
-        events(limit: 10, order_by: { date: desc }) { ${EVENT_ATTRIBUTES} }
+        events(limit: 3, order_by: { date: desc }) { ${EVENT_ATTRIBUTES} }
     }
 `;
 
