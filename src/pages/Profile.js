@@ -7,6 +7,7 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 
 import UserOrderCard from '../components/UserOrderCard';
+import Loading from '../components/Loading';
 
 const GET_USER = gql`
     query getUsers($userEmail: String!) {
@@ -34,22 +35,26 @@ const Profile = ({ user, logout }) => {
     });
 
     if (error) return <div>{JSON.stringify(error, null, 2)}</div>;
-    if (loading) return <div>Loading...</div>;
 
-    const [ gqlUser ] = data.users;
+    const gqlUser = data && data.users && data.users[0];
 
     return (
         <div id="Profile" className="page-wrap">
             <div className="page-container">
-                <img className="user-image" src={user.picture} alt="Profile" />
+                {loading && <Loading height={200} />}
+                {!loading && gqlUser &&
+                    (<>
+                        <img className="user-image" src={user.picture} alt="Profile" />
 
-                <h2>{user.name}</h2>
-                <button className="link" onClick={logout}>logout</button>
-                <div className="user-orders">
-                    {gqlUser.orders.map((order, key) => (
-                        <UserOrderCard order={order} key={key} />
-                    ))}
-                </div>
+                        <h2>{user.name}</h2>
+                        <button className="link" onClick={logout}>logout</button>
+                        <div className="user-orders">
+                            {gqlUser.orders.map((order, key) => (
+                                <UserOrderCard order={order} key={key} />
+                            ))}
+                        </div>
+                    </>)
+                }
             </div>
         </div>
     );
