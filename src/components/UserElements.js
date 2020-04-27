@@ -46,7 +46,7 @@ export default function UserElements () {
     return (
         <UserElementsWrap className="user-elements">
             {!isAuthenticated && (
-                <button className="btn" onClick={() => loginWithRedirect({})}>Log in</button>
+                <button className="btn" onClick={() => loginWithRedirect()}>Log in</button>
             )}
 
             {isAuthenticated && user && <UserSignedIn avatar={user.picture} logout={logout} />}
