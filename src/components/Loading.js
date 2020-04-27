@@ -13,9 +13,11 @@ export default function Loading ({ height }) {
     };
 
     return (
-        <Lottie
-            options={defaultAnimationOptions}
-            height={height}
-        />
+        <div className="loading">
+            <Lottie
+                options={defaultAnimationOptions}
+                height={height}
+            />
+        </div>
     )
 }
