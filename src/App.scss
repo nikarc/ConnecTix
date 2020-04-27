@@ -2,6 +2,7 @@
 @import '../node_modules/bulma/sass/utilities/_all.sass';
 @import '../node_modules/bulma/sass/grid/_all.sass';
 @import './styles/variables.scss';
+@import './styles/animations.scss';
 @import './styles/components/components.scss';
 @import './styles/responsive.scss';
 @import './styles/Fonts.scss';
@@ -377,6 +378,10 @@ header {
     }
 }
 
+.loading {
+    animation: $slow loadingFade $slow forwards;
+    opacity: 0;
+}
 
 /*-- Includes --*/
 // Pages
