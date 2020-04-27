@@ -324,7 +324,7 @@ header {
     }
 
     .card-image {
-        width: 33.333%;
+        flex: 0 0 33.333%;
         height: 100%;
         background-position: center;
         background-size: cover;
@@ -368,7 +368,6 @@ header {
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
-        flex: 0 0 200px;
         margin: 0;
     }
 
