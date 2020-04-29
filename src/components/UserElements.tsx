@@ -3,22 +3,14 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectOrder } from '../store/orderSlice';
 import { useAuth0 } from '../react-auth0-spa';
-import styled from 'styled-components';
 
 import NavUserMenu from './NavUserMenu';
 
-const UserElementsWrap = styled.div`
-    display: flex;
-    align-items: stretch;
-`;
+interface UserSignedInProps {
+    avatar: string
+}
 
-const UserAvatar = styled.img`
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-`;
-
-const UserSignedIn = ({ avatar, logout }) => {
+const UserSignedIn: React.FC<UserSignedInProps> = ({ avatar }) => {
     const { order } = useSelector(selectOrder);
     const ticketCount = order && order.events && Object.keys(order.events).reduce((accumulator, key) => accumulator + order.events[key].available_tickets.length, 0);
 
@@ -26,7 +18,7 @@ const UserSignedIn = ({ avatar, logout }) => {
         <Fragment>
             <div className="avatar-wrap">
                 <Link to="/profile">
-                    <UserAvatar src={avatar} alt="" />
+                    <img className="user-avatar" src={avatar} alt="" />
                 </Link>
                 <NavUserMenu />
             </div>
@@ -41,15 +33,15 @@ const UserSignedIn = ({ avatar, logout }) => {
 };
 
 export default function UserElements () {
-    const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
+    const { isAuthenticated, loginWithRedirect, user } = useAuth0();
     
     return (
-        <UserElementsWrap className="user-elements">
+        <div className="user-elements-wrap">
             {!isAuthenticated && (
                 <button className="btn" onClick={() => loginWithRedirect()}>Log in</button>
             )}
 
-            {isAuthenticated && user && <UserSignedIn avatar={user.picture} logout={logout} />}
-        </UserElementsWrap>
+            {isAuthenticated && user && <UserSignedIn avatar={user.picture} />}
+        </div>
     );
 }

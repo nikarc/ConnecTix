@@ -2,7 +2,11 @@ import React from 'react';
 import Lottie from 'react-lottie'
 import animationData from '../assets/loading-animation.json';
 
-export default function Loading ({ height }) {
+interface LoadingProps {
+    height?: number
+}
+
+const Loading: React.FC<LoadingProps> = ({ height }) => {
     const defaultAnimationOptions = {
         loop: true,
         autoplay: true,
@@ -21,3 +25,9 @@ export default function Loading ({ height }) {
         </div>
     )
 }
+
+Loading.defaultProps = {
+    height: 400
+}
+
+export default Loading;

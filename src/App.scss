@@ -383,6 +383,18 @@ header {
     opacity: 0;
 }
 
+/* User Elements */
+.user-elements-wrap {
+    display: flex;
+    align-items: stretch;
+
+    .user-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+    }
+}
+
 /*-- Includes --*/
 // Pages
 @import './styles/pages/Home.scss';

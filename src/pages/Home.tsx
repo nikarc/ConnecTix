@@ -6,6 +6,8 @@ import { EVENT_ATTRIBUTES } from '../utils/constants';
 import EventCard from '../components/EventCard';
 import FeaturedCard from '../components/FeaturedCard';
 
+import { Event } from '../interfaces/events';
+
 const GET_UPCOMING_EVENTS = gql`
     query getUpcomingEvents {
         events(limit: 3, order_by: { date: desc }) { ${EVENT_ATTRIBUTES} }
@@ -38,7 +40,7 @@ const Home = () => {
             </div>
             <div className="page-container">
                 <ul className="event-list">
-                    {!loading && data.events && data.events.map((event, index) => (
+                    {!loading && data.events && data.events.map((event: Event, index: number) => (
                         <li key={index}>
                             <EventCard event={event} />
                         </li>

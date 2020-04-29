@@ -3,7 +3,12 @@ import { formatDollars } from '../utils/helpers';
 
 import StatusBadge from './StatusBadge';
 
-export default function UserOrderCard ({ order }) {
+import { Order } from '../interfaces/order';
+interface UserOrderCardProps {
+    order: Order
+}
+
+const UserOrderCard: React.FC<UserOrderCardProps> = ({ order }) => {
     return (
         <Fragment>
             <div className="card">
@@ -23,3 +28,5 @@ export default function UserOrderCard ({ order }) {
         </Fragment>
     )
 }
+
+export default UserOrderCard;

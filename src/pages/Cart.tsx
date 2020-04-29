@@ -11,7 +11,7 @@ const Cart = () => {
     const [orderTotal, setOrderTotal] = useState(0)
 
     useEffect(() => {
-        if (order) setOrderTotal(Object.keys(order.events).reduce((acc, e) => acc + order.events[e].available_tickets.reduce((_acc, t) => _acc + t.price, 0), 0));
+        if (order) setOrderTotal(Object.keys(order.events).reduce((acc: number, e: any) => acc + order.events[e].available_tickets.reduce((_acc: number, t: any) => _acc + t.price, 0), 0));
     }, [order]);
 
     if (!order || !Object.keys(order.events).length) return <p>Cart is empty</p>;
