@@ -5,7 +5,7 @@ export const EVENT_ATTRIBUTES = `
 	image
 	title
 	description
-    venueByVenue {
+    venueByVenueId {
       name
     }
 `;

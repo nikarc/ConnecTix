@@ -2,6 +2,7 @@
 @import '../node_modules/bulma/sass/utilities/_all.sass';
 @import '../node_modules/bulma/sass/grid/_all.sass';
 @import './styles/variables.scss';
+@import './styles/animations.scss';
 @import './styles/components/components.scss';
 @import './styles/responsive.scss';
 @import './styles/Fonts.scss';
@@ -258,6 +259,10 @@ header {
     margin: 0 auto;
     padding: 50px 20px;
     max-width: $largeScreen;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     pre {
         overflow: auto;
@@ -320,7 +325,7 @@ header {
     }
 
     .card-image {
-        width: 33.333%;
+        flex: 0 0 33.333%;
         height: 100%;
         background-position: center;
         background-size: cover;
@@ -364,7 +369,6 @@ header {
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
-        flex: 0 0 200px;
         margin: 0;
     }
 
@@ -374,6 +378,22 @@ header {
     }
 }
 
+.loading {
+    animation: $slow loadingFade $slow forwards;
+    opacity: 0;
+}
+
+/* User Elements */
+.user-elements-wrap {
+    display: flex;
+    align-items: stretch;
+
+    .user-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+    }
+}
 
 /*-- Includes --*/
 // Pages

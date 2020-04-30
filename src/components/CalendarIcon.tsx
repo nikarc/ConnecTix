@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-export default function CalendarIcon ({ eventDate }) {
+interface CalendarIconProps {
+    eventDate: string
+}
+
+const CalendarIcon: FC<CalendarIconProps> = ({ eventDate }) => {
     const dtFormatter = new Intl.DateTimeFormat('en-US', {
         year: 'numeric',
         month: 'short',
@@ -15,7 +19,6 @@ export default function CalendarIcon ({ eventDate }) {
         { value: weekday },,
         { value: month },,
         { value: day },,
-        { value: year },,
         { value: hour },,
         { value: minute },,
         { value: dayPeriod }
@@ -31,3 +34,5 @@ export default function CalendarIcon ({ eventDate }) {
         </div>
     );
 }
+
+export default CalendarIcon;

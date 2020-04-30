@@ -12,6 +12,10 @@ import {
 import history from '../utils/history';
 import { useAuth0 } from '../react-auth0-spa';
 
+interface CardError {
+    message?: string
+}
+
 export default function CheckoutForm () {
     const { idToken } = useAuth0();
     const dispatch = useDispatch();
@@ -19,11 +23,11 @@ export default function CheckoutForm () {
     const stripe = useStripe();
     const elements = useElements();
     const [cardIsValid, setCardIsValid] = useState(false);
-    const [cardError, setCardError] = useState(null);
+    const [cardError, setCardError] = useState<CardError>({});
 
     if (!order) return <Redirect to="/" />;
 
-    const validateCard = event => {
+    const validateCard = (event: any) => {
         if (event.complete) {
             return setCardIsValid(true);
         } else if (event.error) {
@@ -33,7 +37,7 @@ export default function CheckoutForm () {
         setCardIsValid(false);
     }
 
-    const submitOrder = async event => {
+    const submitOrder = async (event: any) => {
         event.preventDefault();
 
         if (!stripe || !elements) {
@@ -41,16 +45,16 @@ export default function CheckoutForm () {
             return;
         }
 
-        const cardElement = elements.getElement(CardElement);
+        const cardElement: any = elements.getElement(CardElement);
 
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error, paymentMethod }: any = await stripe.createPaymentMethod({
             type: 'card',
             card: cardElement
         });
 
         if (error) return setCardError(error);
 
-        const { id: sid, card } = paymentMethod;
+        const { id: sid, card }: { id: string, card: any } = paymentMethod;
         const orderId = order.id;
 
         await dispatch(finalizeOrderAsync(card.last4, orderId, sid, idToken));
@@ -61,13 +65,13 @@ export default function CheckoutForm () {
         <form onSubmit={submitOrder}>
             <div className="FormGroup">
                 <div className="FormRow">
-                    {cardError && <div className="card-error error-message"></div>}
+                    {cardError && cardError.message && <div className="card-error error-message"></div>}
                     <CardElement 
                         options={{
                             style: {
                                 base: {
                                     color: '#697386',
-                                    fontWeight: 500,
+                                    fontWeight: '500',
                                     fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
                                     fontSize: '16px',
                                     fontSmoothing: 'antialiased',

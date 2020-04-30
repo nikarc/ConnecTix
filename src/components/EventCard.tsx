@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { DateFormat } from '../utils/dates';
 
-const EventCard = ({ event }) => (
+import { Event } from '../interfaces/events';
+
+const EventCard: React.FC<{ event: Event }> = ({ event }) => (
     <div className="event-card card">
         <div className="card-image" style={{ backgroundImage: `url(${event.image})` }}></div>
         <div className="card-details">

@@ -4,8 +4,14 @@ import slug from 'slug';
 
 import CalendarIcon from '../components/CalendarIcon';
 
-export default function FeaturedCard ({ featuredEvent }) {
-    const { venueByVenue: { name: venueName } } = featuredEvent;
+import { Event } from '../interfaces/events';
+
+interface FeaturedCardProps {
+    featuredEvent: Event
+}
+
+const FeaturedCard: React.FC<FeaturedCardProps> = ({ featuredEvent }) => {
+    const { venueByVenueId: { name: venueName } } = featuredEvent;
     return (
         <div className="featured-card floating-card image-card">
             <div className="card-image" style={{ backgroundImage: `url(${featuredEvent.image})`}}></div>
@@ -25,3 +31,5 @@ export default function FeaturedCard ({ featuredEvent }) {
         </div>
     )
 }
+
+export default FeaturedCard;
