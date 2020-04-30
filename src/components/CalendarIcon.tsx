@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
 
+import { DateTimeFormatOptions } from '../interfaces/global';
+
 interface CalendarIconProps {
     eventDate: string
 }
 
 const CalendarIcon: FC<CalendarIconProps> = ({ eventDate }) => {
-    const dtFormatter = new Intl.DateTimeFormat('en-US', {
+    const dtFormatterOpts: DateTimeFormatOptions = {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
@@ -13,7 +15,8 @@ const CalendarIcon: FC<CalendarIconProps> = ({ eventDate }) => {
         hour: 'numeric',
         minute: 'numeric',
         dayPeriod: 'short'
-    });
+    };
+    const dtFormatter = new Intl.DateTimeFormat('en-US', dtFormatterOpts);
     const date = new Date(eventDate);
     const [
         { value: weekday },,
